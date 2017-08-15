@@ -1,4 +1,4 @@
-<form action="insert-empleado.php" method="post" enctype="multipart/form-data" >
+<form action="insert-empleado.php" method="POST" enctype="multipart/form-data" >
 <a href="../index.html">Regresar</a>
 <br>
   <fieldset>
@@ -17,19 +17,23 @@
 	  <input type="text" id="departamento" name="departamento_text" placeholder="" required="" />
   </div>
   <div>
+    <label for="puesto">Puesto:</label>
+    <input type="text" id="puesto" name="puesto_text" placeholder="" required="" />
+  </div>
+  <div>
     <label for="fecha_ing">Fecha Ingreso:</label>
-	  <input type="date" id="fecha_ing" name="ext_text" placeholder="" required="" />
+	  <input type="date" id="fecha_ing" name="fecha_date" placeholder="" required="" />
   </div>
    <div>
     <label for="">Sexo:</label>
-    <input type="radio" id="M" name="sexo_radio" placeholder="" required="" />
+    <input type="radio" id="M" name="sexo_radio" value="M" placeholder="" required="" />
     <label for="M">M</label>
-    <input type="radio" id="F" name="sexo_radio" placeholder="" required="" />
+    <input type="radio" id="F" name="sexo_radio" value="F" placeholder="" required="" />
     <label for="F">F</label>
   </div>
    <div>
-    <label for="fecha_ing">Tipo empleado:</label>
-      <select>
+    <label for="tipo">Tipo empleado:</label>
+      <select id="tipo" name="tipo-empleado_select">
         <option disabled>Seleccionar uno:</option>
         <option value="cq">Confianza quincena</option>
         <option value="cs">Confianza semana</option>
@@ -40,5 +44,6 @@
   <div>
       <input type="submit" value="guardar">
   </div>
+ <?php include("mensajes.php"); ?>
   </fieldset>
 </form>

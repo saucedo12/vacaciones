@@ -9,6 +9,8 @@
   date_default_timezone_set($timezone);
   $today2 = date("Y-m");
 ?>
+<?php error_reporting(E_ALL ^ E_NOTICE); // Informar de todos los errores , excepto: E_ALL Y E_NOTICE
+?>
 
 
 <!DOCTYPE html>
@@ -56,8 +58,29 @@
 			</div>
 			
 		</div>
+		<!-- Form para buscar por empleado -->
+		<form>
+			<div class="input-group">
+			  <input class="input-group-field" type="text" id="busrcar_num_emp" name="num_emp_text"  required>
+			  <div class="input-group-button">
+			    <input id="j" class="button"	type="submit" name="btn"  value="Buscar"  />
+			  </div>
+			</div>
+		</form>
+<?php 
+// hacemos conexion para buscar por empleado
+  include("conexion.php");
+			if($_GET["num_emp_text"]!=null) 
+			{
+				$conexion2=conectarse();
+				$buscar = $_GET["num_emp_text"];
+				$consulta = "SELECT * FROM empleados WHERE num_emp='$buscar'";
+				$ejecutar_consulta = $conexion2->query($consulta);
+				$registro_empleados = $ejecutar_consulta->fetch_assoc();
+			}		
+?>
 <!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| FORMULARIO |||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
-	<div class="row callout columns large-12">
+	<div class="row callout small  columns large-12">
 		<form action="" method="post" enctype="multipart/form-data">
         	<div class="row">
 				<div class="small-12 medium-4 columns">
@@ -83,16 +106,18 @@
         		</div>
         		
         	</div>
+
         	<div class="row">
+        		<!-- Busque por numero de empleado -->
 			    <div class="large-3 columns">
-			      <label>N° EMPLEADO:
-			        <input type="text" placeholder="." name="empleado_text">
+			      	<label>Numero Empleado:
+			        <input type="text" placeholder="." name="num_emp_text" value="<?php echo $registro_empleados["num_emp"] ?>" >
 			      </label>
 			    </div>
 
 			    <div class="large-9 columns">
 			      <label>NOMBRE:
-			        <input type="text" placeholder="." name="nombre_text">
+			        <input type="text" placeholder="." name="nombre_text" value="<?php echo $registro_empleados["nombre"] ?>" >
 			      </label>
 			    </div>
   			</div>
@@ -105,12 +130,12 @@
 			    </div>
 			    <div class="large-4 columns">
 			      <label>DEPARTAMENTO
-			        <input type="text" placeholder="." name="departamento_text">
+			        <input type="text" placeholder="." name="departamento_text" value="<?php echo $registro_empleados["depto"] ?>">
 			      </label>
 			    </div>
 			    <div class="large-4 columns">
 			      <label>PUESTO
-			        <input type="text" placeholder="." name="puesto_text">
+			        <input type="text" placeholder="." name="puesto_text" value="<?php echo $registro_empleados["puesto"] ?>">
 			      </label>
 			    </div>
   			</div>
@@ -259,3 +284,15 @@ hola
     <script src="../js/app.js"></script>	
 </body>
 </html>
+<!-- Script para validar el formulario -->
+<script>
+	window.onchange=function()
+	{
+		var folio = document.forms("busrcar_num_emp");
+		folio.onchange = ValidarForm;
+		function ValidarForm()
+		{
+			window.location="?$mensaje=Busqueda"+folio.value
+		}
+	}
+</script>
