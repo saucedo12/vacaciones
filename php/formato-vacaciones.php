@@ -2,12 +2,13 @@
 // funcion para tomar el año mes y dia
  $timezone = "America/Chihuahua";
   date_default_timezone_set($timezone);
-  $today = date("Y-m-d");
+  $today = date("Y");
 
   // funcion para tomar el año mes 
  $timezone = "America/Chihuahua";
   date_default_timezone_set($timezone);
-  $today2 = date("Y-m");
+  $today2 = date("Y");
+  $today3=$today2-1;
 ?>
 <?php error_reporting(E_ALL ^ E_NOTICE); // Informar de todos los errores , excepto: E_ALL Y E_NOTICE
 ?>
@@ -46,10 +47,6 @@
 				<div class="columns small-12 medium-2">
 					<div class="button-group large-12 expanded ">
 				       <a href="../index.html" class="button">Regresar</a>
-		<!-- 		       <a href="php/formato-vacaciones.php" class="button">Vacaciones</a>
-				       <a href="" class="button">Consultas</a>
-				       <a href="" class="button hollow success">Altas</a>
-				       <a href="" class="button hollow alert">Bajas</a> -->
 			    	</div>
 				</div>
 				<div class="columns small-12 medium-10">
@@ -82,9 +79,13 @@
 <!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| FORMULARIO |||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 	<div class="row callout small  columns large-12">
 		<form action="" method="post" enctype="multipart/form-data">
+			<!-- fila 1 -->
         	<div class="row">
+
 				<div class="small-12 medium-4 columns">
-        			<img class="thumbnail logo-hor" src="../img/LOGO-HORIZONTAL-CHICO.jpg" alt="">
+        			<label>Numero Empleado:
+			        <input type="text" placeholder="." name="num_emp_text" value="<?php echo $registro_empleados["num_emp"] ?>" >
+			      </label>
         		</div>
 
         		<div class="medium-4 columns">
@@ -98,55 +99,46 @@
 					<label>Tipo de empleado
 					  <select>
 					    <option disabled>Seleccionar uno:</option>
-					    <option value="cq">Confianza quincena</option>
-					    <option value="cs">Confianza semana</option>
-					    <option value="sin">Sindicato</option>
+					    <option value="CQ">Confianza Quincena</option>
+					    <option value="CS">Confianza Semana</option>
+					    <option value="SIN">Sindicato</option>
 					  </select>
 					</label>
         		</div>
         		
         	</div>
-
+			<!-- fila 2 -->
         	<div class="row">
         		<!-- Busque por numero de empleado -->
-			    <div class="large-3 columns">
-			      	<label>Numero Empleado:
-			        <input type="text" placeholder="." name="num_emp_text" value="<?php echo $registro_empleados["num_emp"] ?>" >
-			      </label>
-			    </div>
-
-			    <div class="large-9 columns">
-			      <label>NOMBRE:
-			        <input type="text" placeholder="." name="nombre_text" value="<?php echo $registro_empleados["nombre"] ?>" >
-			      </label>
-			    </div>
-  			</div>
-
-  			<div class="row">
 			    <div class="large-4 columns">
-			      <label>DEPENDENCIA
-			        <input type="text" placeholder="." name="dependencia_text">
-			      </label>
+			      	<label>NOMBRE:
+			        	<input type="text" placeholder="." name="nombre_text" value="<?php echo $registro_empleados["nombre"] ?>" >
+			      	</label>
 			    </div>
-			    <div class="large-4 columns">
+				<div class="large-4 columns">
 			      <label>DEPARTAMENTO
 			        <input type="text" placeholder="." name="departamento_text" value="<?php echo $registro_empleados["depto"] ?>">
 			      </label>
-			    </div>
-			    <div class="large-4 columns">
+  				</div>
+				<div class="large-4 columns">
 			      <label>PUESTO
 			        <input type="text" placeholder="." name="puesto_text" value="<?php echo $registro_empleados["puesto"] ?>">
 			      </label>
 			    </div>
-  			</div>
+
+
+			</div>
+
+			    
+			<!-- fila 3 -->
 
   			<div class="row">
 			    <div class="large-4 columns">
 			    	<div class="row">
 			    		<div class="columns">
-				    		<label>AÑO
-					        	<input type="text" placeholder="." name="año">
-					      	</label>	
+					      <label>DEL:
+					        <input type="date" placeholder="." name="del_date">
+					      </label>
 			    		</div>
 			    	</div>
 			    	<div class="row">
@@ -155,10 +147,10 @@
 							  <legend>Periodo</legend>
 							  <div class="row">
 							  	<div class="columns">
-							  		<input id="checkbox1" type="checkbox" value="2016"><label for="checkbox1">2016</label>
+							  		<input id="checkbox1" type="checkbox" value="2016"><label for="checkbox1"><?php echo $today3; ?></label>
 							  	</div>
 							  	<div class="columns">
-							  		<input id="checkbox2" type="checkbox" value="2017"><label for="checkbox2">2017</label>
+							  		<input id="checkbox2" type="checkbox" value="2017"><label for="checkbox2"><?php echo $today; ?></label>
 							  	</div>
 							  </div>
 							  <div class="row">
@@ -181,15 +173,15 @@
 			    <div class="large-8 columns">
 			    	<div class="row">
 			    		<div class="columns">
-					      <label>DEL:
-					        <input type="date" placeholder="." name="del_date">
+					      <label>AL:
+					        <input type="date" placeholder="." name="al_date">
 					      </label>
 			    		</div>
 		<!-- 	    	</div>
 			    	<div class="row"> -->
 			    		<div class="columns">
-					      <label>AL:
-					        <input type="date" placeholder="." name="al_date">
+					      <label>REGRESA:
+					        <input type="date" placeholder="." name="regresa_date">
 					      </label>
 				    	</div>
 
@@ -198,16 +190,16 @@
 			    <div class="large-4 columns"> -->
 			    	<div class="row">
 			    		<div class="columns">
-					      <label>REGRESA:
-					        <input type="date" placeholder="." name="regresa_date">
+					      <label>TOTAL-DIAS
+					        <input type="number" placeholder="." name="total-dias_num">
 					      </label>
 			    		</div>
 			    	<!-- </div>
 			    	<div class="row"> -->
 			    		<div class="columns">
-					      <label>TOTAL-DIAS
+					      <!-- <label>TOTAL-DIAS
 					        <input type="number" placeholder="." name="total-dias_num">
-					      </label>
+					      </label> -->
 					    </div>
 			    	</div>
 			    	<div class="row">
@@ -220,7 +212,7 @@
 			    </div>
 
   			</div>
-
+				<!-- FILA 4 -->
   				<!-- Zona de jefes -->
 			<div class="row">
 				<div class="large-4 columns">
