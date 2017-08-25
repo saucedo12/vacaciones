@@ -35,9 +35,9 @@
     <label for="tipo">Tipo empleado:</label>
       <select id="tipo" name="tipo-empleado_select">
         <option disabled>Seleccionar uno:</option>
-        <option value="cq">Confianza quincena</option>
-        <option value="cs">Confianza semana</option>
-        <option value="sin">Sindicato</option>
+        <option value="CQ">Confianza quincena</option>
+        <option value="CS">Confianza semana</option>
+        <option value="SIND">Sindicato</option>
       </select>
   </div>
     <br>

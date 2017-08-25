@@ -1,6 +1,6 @@
 <?php 
 //asigno a variables de php los valorees del formulario de nuevos-empleados.php
-$num_emp=$_POST["num_emp_text"];
+$num_emp=$_POST["num_emp_num"];
 $nombre=$_POST["nombre_text"];
 $departamento=$_POST["departamento_text"];
 $puesto=$_POST["puesto_text"];

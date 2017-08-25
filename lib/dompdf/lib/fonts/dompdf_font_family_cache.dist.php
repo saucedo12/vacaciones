@@ -108,4 +108,8 @@
     'italic' => DOMPDF_FONT_DIR . 'DejaVuSerifCondensed-Italic',
     'normal' => DOMPDF_FONT_DIR . 'DejaVuSerifCondensed',
   ),
+  'foundation-icons' => 
+  array (
+    'normal' => DOMPDF_FONT_DIR . 'e59dc436e2da3740e9ecbb4b17a58ee9',
+  ),
 ) ?>

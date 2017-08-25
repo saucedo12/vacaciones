@@ -19,29 +19,16 @@ body{
     padding: .5em;
 }
 
-/*Botones*/
-/*input[type="submit"]{
+footer{
+    background: #090B1A;
+    color: #DAD9D9;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    height: 100px;
+    text-align: center;
+}
 
-   padding: 9px 17px;
-   font-family: Helvetica,calibri, Arial, sans-serif;
-   font-weight: bold; 
-   line-height: 1;
-   color: #212121;
-   border: none;
-   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
-   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#bbb));
-   background-image: -moz-linear-gradient(0% 100% 90deg, #BBBBBB, #FFFFFF);
-   background-color: #fff;
-   border: 1px solid #f1f1f1;
-   border-radius: 10px;
-   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-
-}*/
-/*Botones: efecto cuando pasas el puntero sobre el boton*/
-/*input[type="submit"]:hover, button[type="submit"]:hover{
-background: #7BBFD5;
-border-radius: .25em 0;
-color: #000;
-cursor: pointer;
-
-}*/
+legend{
+  font-size: 1.5em;
+}

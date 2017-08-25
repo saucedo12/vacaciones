@@ -2,7 +2,7 @@
 
 //asigno a variables de php los valorees del formulario de Registro.php
 $id=0;
-$fechaFormato=$_POST["fechaFormato_date"];
+$fechaFormato=$_POST["fechaFormato_hidden"];
 $num_emp=$_POST["num_emp_text"];
 $nombre=$_POST["nombre_text"];
 $departamento=$_POST["departamento_text"];
@@ -10,16 +10,30 @@ $tipo_empleado=$_POST["tipo_empleado_select"];
 $fecha_inicio=$_POST["del_date"];
 $fecha_termina=$_POST["al_date"];
 $regresa=$_POST["regresa_date"];
-$periodo1=$_POST["periodo_check1"];
-$periodo2=$_POST["periodo_check2"];
+
+$añoAnt=$_POST["añoAnt_check"];
+$añoAct=$_POST["añoAct_check"];
+
+$periodoAnt1=$_POST["periodoAnt_check1"]; //año anterior
+$periodoAnt2=$_POST["periodoAnt_check2"]; //año anterior
+$perAnt=$periodoAnt1." ". $periodoAnt2;
+
+$periodoAct1=$_POST["periodoAct_check1"]; //año actual
+$periodoAct2=$_POST["periodoAct_check2"]; //año actual
+$perAct=$periodoAct1." ". $periodoAct2;
+
+$periodo3=$añoAnt." ". $perAnt ." ". $añoAct." ". $perAct;
 $quinquenio=$_POST[""];
 $Totaldias=$_POST["total-dias_num"];
 $restan=0;
 $motivo=$_POST["motivo_text"];
 $tipo_solicitud=$_POST["tipo-solicitud_radio"];
-$Estatus=$_POST["estatus_slc"];
+$Estatus="Enviado";
 
 $puesto=$_POST["puesto_text"];
+
+
+$jefeDepto=$_POST["jefeDepto"];
 
 
 
@@ -40,7 +54,7 @@ $num_regs=$ejecutar_consulta->num_rows;
 if ($num_regs==0) 
 {
 	//inserto el reg a la bd
-		$consulta="INSERT INTO `rol_vacaciones`(`id_rolVacaciones`, `fecha_solicitud`, `num_emp`, `nombre`, `departamento`, `tipo_empleado`, `fecha_inicio`, `fecha_termina`, `fecha_regresa`, `periodo1`, `periodo2`, `quinquenio`, `total_dias`, `restan`, `motivo`, `tipo_solicitud`, `estatus`) VALUES (0,'$fechaFormato','$num_emp','$nombre','$departamento','$tipo_empleado','$fecha_inicio','$fecha_termina','$regresa','$periodo1','$periodo2','$quinquenio','$Totaldias', '$restan', '$motivo','$tipo_solicitud','$Estatus')";
+		$consulta="INSERT INTO `rol_vacaciones`(`id_rolVacaciones`, `fecha_solicitud`, `num_emp`, `nombre`, `departamento`, `tipo_empleado`, `fecha_inicio`, `fecha_termina`, `fecha_regresa`, `anio`, `periodo`, `quinquenio`, `total_dias`, `restan`, `motivo`, `tipo_solicitud`, `estatus`) VALUES (0,'$fechaFormato','$num_emp','$nombre','$departamento','$tipo_empleado','$fecha_inicio','$fecha_termina','$regresa','$añoAct','$periodo3','$quinquenio','$Totaldias', '$restan', '$motivo','$tipo_solicitud','$Estatus')";
 	$ejecutar_consulta=$conexion->query(utf8_encode($consulta));
 
 	if($ejecutar_consulta)
@@ -56,7 +70,7 @@ if ($num_regs==0)
 $conexion->close(); //Cerramos la conexion a la base de datos
     //La función header () Te regresa a cualquier pagina de tu proyecto.
     //Tambien podemos enviar variables a esa pagina
-	header("Location: ../php/formato-vacaciones.php?mensaje=$mensaje");
+	header("Location: ../php/formato-vacaciones.php?mensaje=$mensaje &jefeDepto1=$jefeDepto");
 
 
 

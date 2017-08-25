@@ -1,44 +1,74 @@
+
+
+
 <!-- para crear pdf -->
 <?php ob_start();
 $id=$_GET["id"];
 $mysqli=new mysqli("localhost","root","","vacaciones");
-$NewPdf = "SELECT * FROM rol_vacaciones WHERE id_rolVacaciones='$id' ";
+$NewPdf = "SELECT * FROM empleados WHERE id_empleado=1";
+$Rol="SELECT * FROM rol_vacaciones WHERE id_rolVacaciones='$id' ";
+$consulta4 = $mysqli->query($Rol);
+$registro4=$consulta4->fetch_assoc();
+
+
 $consulta = $mysqli->query($NewPdf);
 $consulta2 = $mysqli->query($NewPdf);
 $consulta3 = $mysqli->query($NewPdf);
 $num_regs=$consulta->num_rows;
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <title>Consultas</title>
+    <title>Imprimir Formato</title>
+    <link rel="stylesheet" href="../css/foundation.css">
+    <!-- <link rel="stylesheet" href="../foundation-icons/foundation-icons.css" /> -->
+    <link rel="stylesheet" href="../css/app.css">
      <STYLE type="text/css">
-   body 
+/*   body 
    {
     border-width: 1px; 
     border: solid; 
-    font-size: .75em;/*tamaño de la fuente*/
-    text-align: center
+    font-size: .75em;
+    text-align: center;
+    padding: 0;
+    margin: 0;
    }
 
+form{
+    margin: 0;
+    padding: 0;
+}*/
    img{
     width: 200px;
-    text-align: left;
+    height: 100px;
+
    }
 
  </STYLE>
-    <!-- <link rel="stylesheet" href="../css/estilos.css"  />  Importamos la hoja de estilos -->
 </head>
 <body>
+
+ <div class=" text-left">
+            <img src="../img/LOGO-HORIZONTAL-CHICO.jpg" alt="">  
+        
+
+             &nbsp; &nbsp; &nbsp;
+           <span> Tipo de solicitud: <b><?php echo utf8_decode($registro4["tipo_solicitud"]); ?></b> </span>
+           <span> Tipo de empleado: <b><?php echo utf8_decode($registro4["tipo_empleado"]); ?></b> </span>
+           <span> Goce de suledo: <b>Si</b> </span>
+           <span> Fecha: <b><?php echo utf8_decode($registro4["fecha_solicitud"]); ?></b> </span>  
+        </div>
+</div>        
+        <div class="columns medium-12 text-center">
+            <h7>*UNA VEZ FIRMADA LA PAPELETA NO SE ACEPTARÁN CAMBIOS NI RECLAMACIONES</h7>
+        </div>
+         
+
 <form  id="consulta" name="consulta_form" method="get">
-  <div style="page-break-after: always;">  
-    <fieldset>
-        <legend>Consultas</legend>
-        <img src="../img/LOGO-HORIZONTAL-CHICO.jpg" alt="">
-        <br><br>
-         <table >
+ <!-- <div style="page-break-after: always;">  -->
+    
+         <table>
         <thead>
             <tr>
                 <th>N° Empleado</th>
@@ -46,11 +76,11 @@ $num_regs=$consulta->num_rows;
                 <th>Dependencia</th>
                 <th>Departamento</th>
                 <th>puesto</th>
-            </tr>    
+            </tr>   
                 
-            
-</div>
-        </thead>
+
+<!-- </div> -->
+         </thead>
         </br>
         <tbody>
             <?php 
@@ -59,9 +89,13 @@ $num_regs=$consulta->num_rows;
                     {
             ?>
                     <tr>
-                        <td><?php echo utf8_decode($registro["id_rolVacaciones"]); ?></td>
+                        <td><?php echo utf8_decode($registro["num_emp"]); ?></td>
                         <td><?php echo utf8_decode($registro["nombre"]); ?></td>
+                        <td>Obras</td>
+                        <td><?php echo utf8_decode($registro["depto"]); ?></td>
+                        <td><?php echo utf8_decode($registro["puesto"]); ?></td>
                     </tr> 
+                    
 
             <?php 
 
@@ -71,34 +105,28 @@ $num_regs=$consulta->num_rows;
         </tbody>
     </table>
 
-    </fieldset>
+
 </form><br>
+<hr>
 <form  id="consulta" name="consulta_form" method="get">
   <div style="page-break-after: always;">  
-    <fieldset>
-        <legend>Consultas</legend>
+ 
+
         <img src="../img/LOGO-HORIZONTAL-CHICO.jpg" alt="">
         <br><br>
-         <table >
+         <table>
         <thead>
             <tr>
-                <th>Folio</th>
-                <th>Extensi&oacute;n</th>
+                <th>N° Empleado</th>
+                <th>Nombre</th>
+                <th>Dependencia</th>
                 <th>Departamento</th>
-                <th>Problema</th>
-            </tr>
-            <tr>
-                <th>Usuario</th>
-                <th>Fecha-Reporte</th>
-                <th>Fecha-Atenci&oacute;n</th>
-                <th>Atendio</th>
-                <th>Obcervaci&oacute;n</th>
-                <th>Estatus</th>
-            </tr>    
+                <th>puesto</th>
+            </tr>   
                 
-            
+     
 </div>
-        </thead>
+         </thead>
         </br>
         <tbody>
             <?php 
@@ -107,9 +135,13 @@ $num_regs=$consulta->num_rows;
                     {
             ?>
                     <tr>
-                        <td><?php echo utf8_decode($registro2["id_rolVacaciones"]); ?></td>
+                        <td><?php echo utf8_decode($registro2["num_emp"]); ?></td>
                         <td><?php echo utf8_decode($registro2["nombre"]); ?></td>
+                        <td>Obras</td>
+                        <td><?php echo utf8_decode($registro2["depto"]); ?></td>
+                        <td><?php echo utf8_decode($registro2["puesto"]); ?></td>
                     </tr> 
+                    
 
             <?php 
 
@@ -119,31 +151,29 @@ $num_regs=$consulta->num_rows;
         </tbody>
     </table>
 
-    </fieldset>
+
+
+
 </form><br>
+<hr>
 <form  id="consulta" name="consulta_form" method="get">
   <div style="page-break-after: always;">  
-    <fieldset>
-        <legend>Consultas</legend>
-         <img src="../img/LOGO-HORIZONTAL-CHICO.jpg" alt="">
+
+
+        <img src="../img/LOGO-HORIZONTAL-CHICO.jpg" alt="">
         <br><br>
-         <table >
+         <table>
         <thead>
             <tr>
-                <th>Folio</th>
-                <th>Extensi&oacute;n</th>
+                <th>N° Empleado</th>
+                <th>Nombre</th>
+                <th>Dependencia</th>
                 <th>Departamento</th>
-                <th>Problema</th>
-                <th>Usuario</th>
-                <th>Fecha-Reporte</th>
-                <th>Fecha-Atenci&oacute;n</th>
-                <th>Atendio</th>
-                <th>Obcervaci&oacute;n</th>
-                <th>Estatus</th>
-            </tr>    
+                <th>puesto</th>
+            </tr>   
                 
             
-</div>
+
         </thead>
         </br>
         <tbody>
@@ -153,9 +183,13 @@ $num_regs=$consulta->num_rows;
                     {
             ?>
                     <tr>
-                   <td><?php echo utf8_decode($registro3["id_rolVacaciones"]); ?></td>
+                        <td><?php echo utf8_decode($registro3["num_emp"]); ?></td>
                         <td><?php echo utf8_decode($registro3["nombre"]); ?></td>
+                        <td>Obras</td>
+                        <td><?php echo utf8_decode($registro3["depto"]); ?></td>
+                        <td><?php echo utf8_decode($registro3["puesto"]); ?></td>
                     </tr> 
+                    
 
             <?php 
 
@@ -165,9 +199,17 @@ $num_regs=$consulta->num_rows;
         </tbody>
     </table>
 
-    </fieldset>
-</form>
+</div>
+
+</form><br>
+
+
+
 </body>
+    <script src="../js/vendor/jquery.js"></script>
+    <script src="../js/vendor/what-input.js"></script>
+    <script src="../js/vendor/foundation.js"></script>
+    <script src="../js/app.js"></script>
 </html>
 
 <!-- con esto creamos un pdf -->

@@ -13,8 +13,13 @@
    $timezone = "America/Chihuahua";
   date_default_timezone_set($timezone);
   $today4 = date("Y-m-d");
+
+     $timezone = "America/Chihuahua";
+  date_default_timezone_set($timezone);
+  $today5 = date("l-d-m-y");
 ?>
 <?php error_reporting(E_ALL ^ E_NOTICE); // Informar de todos los errores , excepto: E_ALL Y E_NOTICE
+$jefeDepto = $_GET["jefeDepto1"];
 ?>
 
 
@@ -31,16 +36,7 @@
 <body>
     </div>
 <!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| MENU |||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
-<!--     <div class="row">
-      <div class="button-group large-12 expanded ">
-        <a href="" class="button">Inicio</a>
-        <a href="php/formato-vacaciones.php" class="button">Vacaciones</a>
-        <a href="" class="button">Consultas</a>
-        <a href="" class="button hollow success">Altas</a>
-        <a href="" class="button hollow alert">Bajas</a>
-      </div>
-    </div>
- -->
+
 <!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| MIGAS DE PAN ||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
 <!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| PRINCIPAL |||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
@@ -48,12 +44,7 @@
     <div class="row">
     		<div class="small-12 medium-12 columns text-center">
 				<div class="row expanded">
-					<div class="columns small-12 medium-2">
-						<div class="button-group large-12 expanded ">
-					       <a href="../index.html" class="button">Regresar</a>
-				    	</div>
-					</div>
-					<div class="columns small-12 medium-10">
+					<div class="columns small-12 medium-12">
 						<h5>PRESIDENCIA MUNICIPAL DE CHIHUAHUA</h5>
 					</div>
 				</div>
@@ -64,23 +55,26 @@
 		<form>
 			<div class="row">
 				<div class="columns medium-4">
-				<div class="input-group">
-				  <input class="input-group-field" type="text" id="busrcar_num_emp" name="num_emp_text"  required>
-				  <div class="input-group-button">
-				    <input id="j" class="button"	type="submit" name="btn"  value="Buscar"  />
-				  </div>
+					<div class="button-group large-12 expanded ">
+						<a href="../index.html" class="button">Regresar</a>
+					</div>
+				
+				</div>
+				<div class="columns medium-4">
+	<!-- 			<div>
+						<label name="fechaFormato_date" value="<?php echo $today4; ?>">
+							<?php echo $today4; ?>
+						</label>
+					</div> -->
+					<div class="input-group">
+					  <input class="input-group-field" type="text" id="busrcar_num_emp" name="num_emp_text"  required>
+					  <div class="input-group-button">
+					    <input id="j" class="button" type="submit" name="btn"  value="Buscar"  />
+					  </div>
+					</div>
+							
 				</div>
 			</div>
-			<div class="columns medium-4">
-				<div>
-					<label>
-						<input type="date" placeholder="." name="fechaFormato_date" value="<?php echo $today4; ?>">
-					</label>
-				</div>
-			</div>
-			</div>
-			
-		
 		</form>
 </div>
 
@@ -104,6 +98,21 @@
 <!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| FORMULARIO |||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 	<div class="row callout small  columns large-12">
 		<form action="guardar-formato.php" method="POST" enctype="multipart/form-data">
+			<div class="row">
+				<div class="column medium-6 text-center">
+					<label name="fechaFormato_label" >
+						<b>Fecha Solicitud:</b> <?php echo $today5; ?>
+					</label>
+					<input type="hidden" name="fechaFormato_hidden" value="<?php echo $today4; ?>">
+				</div>
+				<div class="column medium-6 text-center">
+					<label name="fechaFormato_label" >
+						<b>CON GOCE DE SUELDO:</b>
+					</label>
+					<input name="sueldo_radio" id="radio_si" type="radio" required="" value="SI"><label for="radio_si">Si</label>
+					<input name="sueldo_radio" id="radio_no" type="radio" required="" value="NO"><label for="radio_no">No</label>
+				</div>
+			</div>
 			<!-- fila 1 -->
         	<div class="row">
 				<div class="small-12 medium-4 columns">
@@ -115,17 +124,15 @@
         		<div class="medium-4 columns">
 	        		<fieldset class="fieldset">
 					  <legend>Tipo de solicitud</legend>
-					  <input name="tipo-solicitud_radio" id="radio_vacaciones" type="radio" required="" value="Vacaciones"><label for="checkbox_vacaciones">Vacaciones</label>
-					  <input name="tipo-solicitud_radio" id="radio_permisos" type="radio" value="Permiso"><label for="checkbox_permisos">Permisos</label>
+					  <input name="tipo-solicitud_radio" id="radio_vacaciones" type="radio" required="" value="Vacaciones"><label for="radio_vacaciones">Vacaciones</label>
+					  <input name="tipo-solicitud_radio" id="radio_permisos" type="radio" value="Permiso"><label for="radio_permisos">Permisos</label>
 					</fieldset>	
         		</div>
         		<div class="medium-4 columns">
 					<label>Tipo de empleado
 					  <select name="tipo_empleado_select" required="">
 					    <option disabled>Seleccionar uno:</option>
-					    <option value="CQ">Confianza Quincena</option>
-					    <option value="CS">Confianza Semana</option>
-					    <option value="SIN">Sindicato</option>
+					    <option value="<?php echo $registro_empleados["tipo_empleado"] ?>"><?php echo $registro_empleados["tipo_empleado"] ?></option>
 					  </select>
 					</label>
         		</div>
@@ -141,7 +148,7 @@
 			    </div>
 				<div class="large-4 columns">
 			      <label>DEPARTAMENTO
-			        <input type="text" placeholder="." name="departamento_text" required="" value="<?php echo $registro_empleados["depto"] ?>">
+			        <input type="text" placeholder="." name="departamento_text" required="" value="<?php echo utf8_decode($registro_empleados["depto"]) ?>">
 			      </label>
   				</div>
 				<div class="large-4 columns">
@@ -161,7 +168,7 @@
 			    	<div class="row">
 			    		<div class="columns">
 					      <label>DEL:
-					        <input type="date" placeholder="." name="del_date" required="">
+					        <input type="date" value="<?php echo $today5; ?>" placeholder="." name="del_date" required="">
 					      </label>
 			    		</div>
 			    	</div>
@@ -171,20 +178,20 @@
 							  <legend>Periodo</legend>
 							  <div class="row">
 							  	<div class="columns">
-							  		<input id="checkbox1" type="checkbox" value="<?php echo $today3; ?>"><label for="checkbox1"><?php echo $today3; ?></label>
+							  		<input id="checkbox1" name="añoAnt_check"  type="checkbox" value="<?php echo $today3; ?>"><label for="checkbox1"><?php echo $today3; ?></label>
 							  	</div>
 							  	<div class="columns">
-							  		<input id="checkbox2" type="checkbox" value="<?php echo $today2; ?>"><label for="checkbox2"><?php echo $today2; ?></label>
+							  		<input id="checkbox2" name="añoAct_check"  type="checkbox" value="<?php echo $today2; ?>"><label for="checkbox2"><?php echo $today2; ?></label>
 							  	</div>
 							  </div>
 							  <div class="row">
 							  	<div class="columns">
-							  		<input id="checkbox3" type="checkbox" name="periodo_check1" value="1"><label for="checkbox3">1</label>
-							  		<input id="checkbox4" type="checkbox" name="periodo_check1" value="2"><label for="checkbox4">2</label>
+							  		<input id="checkbox3" type="checkbox" name="periodoAnt_check1" value="1°"><label for="checkbox3">1</label>
+							  		<input id="checkbox4" type="checkbox" name="periodoAnt_check2" value="2°"><label for="checkbox4">2</label>
 							  	</div>
 							  	<div class="columns">
-							  		<input id="checkbox3" type="checkbox" name="periodo_check2" value="1"><label for="checkbox3">1</label>
-							  		<input id="checkbox4" type="checkbox" name="periodo_check2" value="2"><label for="checkbox4">2</label>
+							  		<input id="checkbox3" type="checkbox" name="periodoAct_check1" value="1°"><label for="checkbox3">1</label>
+							  		<input id="checkbox4" type="checkbox" name="periodoAct_check2" value="2°"><label for="checkbox4">2</label>
 							  	</div>
 							  </div>
 
@@ -198,14 +205,14 @@
 			    	<div class="row">
 			    		<div class="columns">
 					      <label>AL:
-					        <input type="date" placeholder="." name="al_date" required="">
+					        <input type="date" value="<?php echo $today5; ?>" placeholder="." name="al_date" required="">
 					      </label>
 			    		</div>
 		<!-- 	    	</div>
 			    	<div class="row"> -->
 			    		<div class="columns">
 					      <label>REGRESA:
-					        <input type="date" placeholder="." name="regresa_date" required="">
+					        <input type="date" value="<?php echo $today5; ?>" placeholder="." name="regresa_date" required="">
 					      </label>
 				    	</div>
 
@@ -238,27 +245,30 @@
 			<div class="row">
 				<div class="large-4 columns">
 					<label>Jefe de Depto. de Servicios Administrativos 
-					  <select>
+					  <select name="jefeDepto">
 					    <option disabled>Seleccionar uno:</option>
-					    <option value="">Lic. Estefanía Elvira Sandoval Mariscal</option>
-					    <!-- <option value="">Ing. Carlos Humberto Cabello Gil</option> -->
+					    <option value="Lic. Estefanía Elvira Sandoval Mariscal">Lic. Estefanía Elvira Sandoval Mariscal</option>
+					    <option value=" ">N/A</option>
+					    
 					  </select>
 					</label>
 				</div>
 				<div class="large-4 columns">
-					<label>.
-					  <select>
+					<label>Sub. Director
+					  <select name="suBdirector">
 					    <option disabled>Seleccionar uno:</option>
+					    <option value=" ">N/A</option>
 					    <option value="">Ing. Javier Villarreal Posada</option>
-					    <option value="">Ing. Carlos Humberto Cabello Gil  </option>
+					    <!-- <option value="">Ing. Carlos Humberto Cabello Gil  </option> -->
 					    <option value="">Arq. Carlos Aguilar Garcia </option>
 					  </select>
 					</label>
 				</div>
 				<div class="large-4 columns">
 					<label>Jefe Inmediato
-					  <select>
+					  <select name="jefeInmediato">
 					    <option disabled>Seleccionar uno:</option>
+					    <option value=" ">N/A</option>
 					    <option value="">Ing. Arturo Gomez Ballona</option>
 					    <option value="">Lic. Yanai Angulo Herrera</option>
 					    <option value="">Ing. Juan Pablo Moreno Cordero</option>
@@ -268,7 +278,7 @@
 					    <option value="">Ing. Ma. del Carmen Mendoza Rugelio</option>
 					    <option value="">C. Román Narciso Hinojos Díaz</option>
 					    <option value="">Lic. Alejandra Márquez Chávez</option>
-					    
+					    <option value="">Ing. Carlos Humberto Cabello Gil</option>
 					  </select>
 					</label>
 				</div>
@@ -282,7 +292,7 @@
   				</div>
 			   <div class="large-2 columns">
 			      	<div class="button-group expanded">	
-					 <a class="button" href="pdf-formato.php?id=<?php echo $registro_empleados1['id_rolVacaciones'];?>">Imprimir</a>
+					 <a class="button" href="pruebaPDF.php?id=<?php echo $registro_empleados1['id_rolVacaciones'];?> &jefeDepto2=<?php echo $jefeDepto; ?> &num_emp=<?php echo $registro_empleados["num_emp"]; ?>  ">Imprimir</a>
 					</div>
 			    </div>
   			</div>
