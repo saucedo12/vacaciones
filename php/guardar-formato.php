@@ -23,19 +23,16 @@ $periodoAct2=$_POST["periodoAct_check2"]; //año actual
 $perAct=$periodoAct1." ". $periodoAct2;
 
 $periodo3=$añoAnt." ". $perAnt ." ". $añoAct." ". $perAct;
-$quinquenio=$_POST[""];
+$quinquenio=$_POST["quinquenio_num"];
 $Totaldias=$_POST["total-dias_num"];
 $restan=0;
 $motivo=$_POST["motivo_text"];
 $tipo_solicitud=$_POST["tipo-solicitud_radio"];
 $Estatus="Enviado";
 
-$puesto=$_POST["puesto_text"];
-
-
-$jefeDepto=$_POST["jefeDepto"];
-
-
+$jefeAdtvo=$_POST["jefeDepto"];
+$subDirector=$_POST["subDirector"];
+$jefeInmediato=$_POST["jefeInmediato"];
 
 
 
@@ -54,7 +51,7 @@ $num_regs=$ejecutar_consulta->num_rows;
 if ($num_regs==0) 
 {
 	//inserto el reg a la bd
-		$consulta="INSERT INTO `rol_vacaciones`(`id_rolVacaciones`, `fecha_solicitud`, `num_emp`, `nombre`, `departamento`, `tipo_empleado`, `fecha_inicio`, `fecha_termina`, `fecha_regresa`, `anio`, `periodo`, `quinquenio`, `total_dias`, `restan`, `motivo`, `tipo_solicitud`, `estatus`) VALUES (0,'$fechaFormato','$num_emp','$nombre','$departamento','$tipo_empleado','$fecha_inicio','$fecha_termina','$regresa','$añoAct','$periodo3','$quinquenio','$Totaldias', '$restan', '$motivo','$tipo_solicitud','$Estatus')";
+		$consulta="INSERT INTO `rol_vacaciones`(`id_rolVacaciones`, `fecha_solicitud`, `num_emp`, `nombre`, `departamento`, `tipo_empleado`, `fecha_inicio`, `fecha_termina`, `fecha_regresa`, `anio`, `periodo`, `quinquenio`, `total_dias`, `restan`, `motivo`, `tipo_solicitud`, `estatus`,`jefeAdtvo`,`subDirector`,`jefeInmediato`) VALUES (0,'$fechaFormato','$num_emp','$nombre','$departamento','$tipo_empleado','$fecha_inicio','$fecha_termina','$regresa','$añoAct','$periodo3','$quinquenio','$Totaldias', '$restan', '$motivo','$tipo_solicitud','$Estatus','$jefeAdtvo','$subDirector','$jefeInmediato')";
 	$ejecutar_consulta=$conexion->query(utf8_encode($consulta));
 
 	if($ejecutar_consulta)
@@ -70,7 +67,7 @@ if ($num_regs==0)
 $conexion->close(); //Cerramos la conexion a la base de datos
     //La función header () Te regresa a cualquier pagina de tu proyecto.
     //Tambien podemos enviar variables a esa pagina
-	header("Location: ../php/formato-vacaciones.php?mensaje=$mensaje &jefeDepto1=$jefeDepto");
+	header("Location: ../php/formato-vacaciones.php?mensaje=$mensaje");
 
 
 

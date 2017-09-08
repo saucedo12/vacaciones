@@ -16,68 +16,10 @@
 
      $timezone = "America/Chihuahua";
   date_default_timezone_set($timezone);
-  $today5 = date("l-d-m-y");
+  $today5 = date("d-m-y");
 ?>
 <?php error_reporting(E_ALL ^ E_NOTICE); // Informar de todos los errores , excepto: E_ALL Y E_NOTICE
-$jefeDepto = $_GET["jefeDepto1"];
 ?>
-
-
-<!DOCTYPE html>
-<html class="no-js" lang="es" dir="ltr">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<title>Formato de vacaciones</title>
-	<link rel="stylesheet" href="../css/foundation.css">
-    <link rel="stylesheet" href="../foundation-icons/foundation-icons.css" />
-    <link rel="stylesheet" href="../css/app.css">
-</head>
-<body>
-    </div>
-<!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| MENU |||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
-
-<!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| MIGAS DE PAN ||||||||||||||||||||||||||||||||||||||||||||||||||||-->
-
-<!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| PRINCIPAL |||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
-
-    <div class="row">
-    		<div class="small-12 medium-12 columns text-center">
-				<div class="row expanded">
-					<div class="columns small-12 medium-12">
-						<h5>PRESIDENCIA MUNICIPAL DE CHIHUAHUA</h5>
-					</div>
-				</div>
-			</div>
-
-<div class="row columns medium-12">
-			<!-- Form para buscar por empleado -->
-		<form>
-			<div class="row">
-				<div class="columns medium-4">
-					<div class="button-group large-12 expanded ">
-						<a href="../index.html" class="button">Regresar</a>
-					</div>
-				
-				</div>
-				<div class="columns medium-4">
-	<!-- 			<div>
-						<label name="fechaFormato_date" value="<?php echo $today4; ?>">
-							<?php echo $today4; ?>
-						</label>
-					</div> -->
-					<div class="input-group">
-					  <input class="input-group-field" type="text" id="busrcar_num_emp" name="num_emp_text"  required>
-					  <div class="input-group-button">
-					    <input id="j" class="button" type="submit" name="btn"  value="Buscar"  />
-					  </div>
-					</div>
-							
-				</div>
-			</div>
-		</form>
-</div>
-
 <?php 
 // hacemos conexion para buscar por empleado
   include("conexion.php");
@@ -95,35 +37,114 @@ $jefeDepto = $_GET["jefeDepto1"];
 				$registro_empleados1 = $ejecutar_consulta1->fetch_assoc();
 	
 ?>
+
+<!DOCTYPE html>
+<html class="no-js" lang="es" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Formato de vacaciones</title>
+	<link rel="stylesheet" href="../css/foundation.css">
+    <link rel="stylesheet" href="../foundation-icons/foundation-icons.css" />
+    <link rel="stylesheet" href="../css/app.css">
+</head>
+<body>
+    </div>
+<!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| MENU |||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<div class="row">
+  	<div class="row columns medium-12">
+     	<div class="top-bar" id="responsive-menu">
+		    <div class="top-bar-left">
+		        <ul class="dropdown menu" data-dropdown-menu>
+		          <li><a href="../index.php" class="button" >Regresar</a></li>
+		          <li class="menu-text">DOPM</li>
+<!-- 		          <li class="has-submenu">
+		            <a href="#0">One</a>
+		            <ul class="submenu menu vertical" data-submenu>
+		              <li><a href="#0">One</a></li>
+		              <li><a href="#0">Two</a></li>
+		              <li><a href="#0">Three</a></li>
+		            </ul>
+		          </li>
+		          <li><a href="#0">Two</a></li>
+		          <li><a href="#0">Three</a></li> -->
+		        </ul>
+		    </div>
+	      	<div class="top-bar-rigth">
+				<!-- Form para buscar por empleado -->
+				<form>
+					<div class="row">
+					<div class="columns">
+						<label for="">
+							<input  type="text" id="busrcar_num_emp" name="num_emp_text" placeholder="N° Empleado"  required>
+						</label>
+					</div>
+					<div class="columns">
+						<label for="">
+							<input id="j" class="button" type="submit" name="btn"   value="Buscar"  />
+						</label>						
+					</div>						
+					</div>	
+				</form>
+	      	</div>
+    	</div>    
+  	</div>
+ </div>
+<!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| MIGAS DE PAN ||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+<!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| PRINCIPAL |||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+<div class="row">
+
 <!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| FORMULARIO |||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 	<div class="row callout small  columns large-12">
 		<form action="guardar-formato.php" method="POST" enctype="multipart/form-data">
 			<div class="row">
-				<div class="column medium-6 text-center">
+				<div class="column medium-3 text-center">
 					<label name="fechaFormato_label" >
-						<b>Fecha Solicitud:</b> <?php echo $today5; ?>
+						<b>Fecha:</b><br> <?php echo $today5; ?>
 					</label>
 					<input type="hidden" name="fechaFormato_hidden" value="<?php echo $today4; ?>">
 				</div>
-				<div class="column medium-6 text-center">
+				<div class="column medium-3 text-center">
 					<label name="fechaFormato_label" >
-						<b>CON GOCE DE SUELDO:</b>
+						<b>Solicitud:</b>
+					</label>
+					  <input name="tipo-solicitud_radio" id="radio_vacaciones" type="radio" required="" value="Vacaciones"><label for="radio_vacaciones">Vacaciones</label>
+					  <input name="tipo-solicitud_radio" id="radio_permisos" type="radio" value="Permiso"><label for="radio_permisos">Permisos</label>
+				</div>
+				<div class="column medium-3 text-center">
+					<label name="fechaFormato_label" >
+						<b>Goce de sueldo:</b>
 					</label>
 					<input name="sueldo_radio" id="radio_si" type="radio" required="" value="SI"><label for="radio_si">Si</label>
 					<input name="sueldo_radio" id="radio_no" type="radio" required="" value="NO"><label for="radio_no">No</label>
 				</div>
+				<div class="column medium-3 text-center">
+					<label name="fechaFormato_label" >
+						<b>Tipo de empleado: </b><br>
+						<input type="text" value="<?php echo $registro_empleados["tipo_empleado"] ?>">
+					</label>
+				</div>
+
+
 			</div>
 			<!-- fila 1 -->
         	<div class="row">
-				<div class="small-12 medium-4 columns">
-        			<label>Numero Empleado:
+				<div class="medium-3 columns">
+        			<label>N° Empleado:
 			        <input type="text" placeholder="." name="num_emp_text" required value="<?php echo $registro_empleados["num_emp"]; ?>" >
 			      </label>
         		</div>
+        		<div class="medium-9 columns">
+			      	<label>Nombre:
+			        	<input type="text" placeholder="." name="nombre_text" required="" value="<?php echo $registro_empleados["nombre"] ?>" />
+			      	</label>
+			    </div>
 
-        		<div class="medium-4 columns">
+<!--         		<div class="medium-4 columns">
 	        		<fieldset class="fieldset">
-					  <legend>Tipo de solicitud</legend>
+					  <legend>SOLICITUD</legend>
 					  <input name="tipo-solicitud_radio" id="radio_vacaciones" type="radio" required="" value="Vacaciones"><label for="radio_vacaciones">Vacaciones</label>
 					  <input name="tipo-solicitud_radio" id="radio_permisos" type="radio" value="Permiso"><label for="radio_permisos">Permisos</label>
 					</fieldset>	
@@ -135,24 +156,20 @@ $jefeDepto = $_GET["jefeDepto1"];
 					    <option value="<?php echo $registro_empleados["tipo_empleado"] ?>"><?php echo $registro_empleados["tipo_empleado"] ?></option>
 					  </select>
 					</label>
-        		</div>
+        		</div> -->
         		
         	</div>
 			<!-- fila 2 -->
         	<div class="row">
         		<!-- Busque por numero de empleado -->
-			    <div class="large-4 columns">
-			      	<label>NOMBRE:
-			        	<input type="text" placeholder="." name="nombre_text" required="" value="<?php echo $registro_empleados["nombre"] ?>" />
-			      	</label>
-			    </div>
-				<div class="large-4 columns">
-			      <label>DEPARTAMENTO
+
+				<div class="medium-6 columns">
+			      <label>Departamento
 			        <input type="text" placeholder="." name="departamento_text" required="" value="<?php echo utf8_decode($registro_empleados["depto"]) ?>">
 			      </label>
   				</div>
-				<div class="large-4 columns">
-			      <label>PUESTO
+				<div class="medium-6 columns">
+			      <label>Puesto
 			        <input type="text" placeholder="." name="puesto_text" required="" value="<?php echo $registro_empleados["puesto"] ?>">
 			      </label>
 			    </div>
@@ -162,12 +179,13 @@ $jefeDepto = $_GET["jefeDepto1"];
 
 			    
 			<!-- fila 3 -->
+			<!-- periodo dias y motivo -->
 
   			<div class="row">
 			    <div class="large-4 columns">
 			    	<div class="row">
 			    		<div class="columns">
-					      <label>DEL:
+					      <label>Se va del:
 					        <input type="date" value="<?php echo $today5; ?>" placeholder="." name="del_date" required="">
 					      </label>
 			    		</div>
@@ -204,14 +222,14 @@ $jefeDepto = $_GET["jefeDepto1"];
 			    <div class="large-8 columns">
 			    	<div class="row">
 			    		<div class="columns">
-					      <label>AL:
+					      <label>Hasta:
 					        <input type="date" value="<?php echo $today5; ?>" placeholder="." name="al_date" required="">
 					      </label>
 			    		</div>
 		<!-- 	    	</div>
 			    	<div class="row"> -->
 			    		<div class="columns">
-					      <label>REGRESA:
+					      <label>Regresa:
 					        <input type="date" value="<?php echo $today5; ?>" placeholder="." name="regresa_date" required="">
 					      </label>
 				    	</div>
@@ -221,13 +239,16 @@ $jefeDepto = $_GET["jefeDepto1"];
 			    <div class="large-4 columns"> -->
 			    	<div class="row">
 			    		<div class="columns">
-					      <label>TOTAL-DIAS
+					      <label>Dias del periodo vacacional 
 					        <input type="number" placeholder="." name="total-dias_num" required="">
 					      </label>
 			    		</div>
 			    	<!-- </div>
 			    	<div class="row"> -->
 			    		<div class="columns">
+			    		<label>Quinquenios 
+					        <input type="number" placeholder="." name="quinquenio_num" required="">
+					      </label>
 					    </div>
 			    	</div>
 			    	<div class="row">
@@ -245,40 +266,39 @@ $jefeDepto = $_GET["jefeDepto1"];
 			<div class="row">
 				<div class="large-4 columns">
 					<label>Jefe de Depto. de Servicios Administrativos 
-					  <select name="jefeDepto">
+					  <select name="jefeDepto" required="">
 					    <option disabled>Seleccionar uno:</option>
-					    <option value="Lic. Estefanía Elvira Sandoval Mariscal">Lic. Estefanía Elvira Sandoval Mariscal</option>
-					    <option value=" ">N/A</option>
-					    
+					    <option value="Lic. Estefanía Elvira Sandoval Mariscal">Lic. Estefanía Elvira Sandoval Mariscal</option>	    
 					  </select>
 					</label>
 				</div>
 				<div class="large-4 columns">
 					<label>Sub. Director
-					  <select name="suBdirector">
+					  <select name="subDirector" required="">
 					    <option disabled>Seleccionar uno:</option>
-					    <option value=" ">N/A</option>
-					    <option value="">Ing. Javier Villarreal Posada</option>
+					    <option value="N/A">N/A</option>
+					    <option value="Ing. Javier Villarreal Posada">Ing. Javier Villarreal Posada</option>
 					    <!-- <option value="">Ing. Carlos Humberto Cabello Gil  </option> -->
-					    <option value="">Arq. Carlos Aguilar Garcia </option>
+					    <option value="Arq. Carlos Aguilar Garcia">Arq. Carlos Aguilar Garcia </option>
 					  </select>
 					</label>
 				</div>
 				<div class="large-4 columns">
 					<label>Jefe Inmediato
-					  <select name="jefeInmediato">
+					  <select name="jefeInmediato" required="">
 					    <option disabled>Seleccionar uno:</option>
-					    <option value=" ">N/A</option>
-					    <option value="">Ing. Arturo Gomez Ballona</option>
-					    <option value="">Lic. Yanai Angulo Herrera</option>
-					    <option value="">Ing. Juan Pablo Moreno Cordero</option>
-					    <option value="">Ing. Javier Villarreal Posada </option>
-					    <option value="">Ing. Carlos Humberto Cabello Gil</option>
-					    <option value="">Lic. Luis Raúl Valenzuela Colomo</option>
-					    <option value="">Ing. Ma. del Carmen Mendoza Rugelio</option>
-					    <option value="">C. Román Narciso Hinojos Díaz</option>
-					    <option value="">Lic. Alejandra Márquez Chávez</option>
-					    <option value="">Ing. Carlos Humberto Cabello Gil</option>
+					    <option value="N/A">N/A</option>
+					    <option value="Ing. Arturo Gomez Ballona">Ing. Arturo Gomez Ballona</option>
+					    <option value="Ing. Luis Carlos Martinez">Ing. Luis Carlos Martinez</option>
+					    <option value="Lic. Yanai Angulo Herrera">Lic. Yanai Angulo Herrera</option>
+					    <option value="Ing. Juan Pablo Moreno Cordero">Ing. Juan Pablo Moreno Cordero</option>
+					    <option value="Ing. Javier Villarreal Posada">Ing. Javier Villarreal Posada </option>
+					    <option value="Ing. Carlos Humberto Cabello Gil">Ing. Carlos Humberto Cabello Gil</option>
+					    <option value="Lic. Luis Raúl Valenzuela Colomo">Lic. Luis Raúl Valenzuela Colomo</option>
+					    <option value="Ing. Ma. del Carmen Mendoza Rugelio">Ing. Ma. del Carmen Mendoza Rugelio</option>
+					    <option value="C. Román Narciso Hinojos Díaz">C. Román Narciso Hinojos Díaz</option>
+					    <option value="Lic. Alejandra Márquez Chávez">Lic. Alejandra Márquez Chávez</option>
+					    <option value="Ing. Carlos Humberto Cabello Gil">Ing. Carlos Humberto Cabello Gil</option>
 					  </select>
 					</label>
 				</div>
@@ -292,7 +312,7 @@ $jefeDepto = $_GET["jefeDepto1"];
   				</div>
 			   <div class="large-2 columns">
 			      	<div class="button-group expanded">	
-					 <a class="button" href="pruebaPDF.php?id=<?php echo $registro_empleados1['id_rolVacaciones'];?> &jefeDepto2=<?php echo $jefeDepto; ?> &num_emp=<?php echo $registro_empleados["num_emp"]; ?>  ">Imprimir</a>
+					 <a class="button" href="pruebaPDF.php?id=<?php echo $registro_empleados1['id_rolVacaciones'];?>  ">Imprimir</a>
 					</div>
 			    </div>
   			</div>
@@ -300,7 +320,7 @@ $jefeDepto = $_GET["jefeDepto1"];
         </form>  
 	</div>
 	<?php include("mensajes.php"); ?>
-    </div>
+</div>
  
 <!--  ||||||||||||||||||||||||||||||||||||||||||||||||||||||| javascript |||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
     <script src="../js/vendor/jquery.js"></script>
@@ -314,10 +334,13 @@ $jefeDepto = $_GET["jefeDepto1"];
 	window.onchange=function()
 	{
 		var folio = document.forms("busrcar_num_emp");
+		
 		folio.onchange = ValidarForm;
 		function ValidarForm()
 		{
 			window.location="?$mensaje=Busqueda"+folio.value
 		}
+
 	}
+
 </script>

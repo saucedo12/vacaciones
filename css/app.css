@@ -6,8 +6,23 @@
 }
 
 body{
-	font-size: .55em;
+	font-size: 1em;
 }
+
+legend{
+  font-size: 1.5em;
+}
+
+div .input-group{
+    margin-bottom: 0;
+}
+
+
+/*leyenda de papeleta firmada*/
+.pequeño{
+    font-size: .70em;
+}
+
 
 .mensajes
 {
@@ -19,6 +34,9 @@ body{
     padding: .5em;
 }
 
+
+
+
 footer{
     background: #090B1A;
     color: #DAD9D9;
@@ -29,6 +47,5 @@ footer{
     text-align: center;
 }
 
-legend{
-  font-size: 1.5em;
-}
+
+
